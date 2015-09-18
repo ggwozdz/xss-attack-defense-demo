@@ -1,0 +1,16 @@
+{
+  "name": "static",
+  "version": "0.0.0",
+  "dependencies": {
+    "backbone": "~1.1.0",
+    "handlebars": "~4.0.2",
+    "jquery": "~2.1.0",
+    "lodash": "~2.4.1",
+    "modernizr": "~2.7.1",
+    "sass-bootstrap": "~3.0.2"
+  },
+  "devDependencies": {
+    "chai": "~3.3.0",
+    "mocha": "~2.3.2"
+  }
+}

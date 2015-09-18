@@ -1,7 +1,14 @@
 *.class
+*.iml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+.idea/
+.target/
+
+src/main/resources/static/node_modules/
+src/main/resources/static/tmp/
+src/main/resources/static/app/bower_components/
 
 # Package Files #
 *.jar
