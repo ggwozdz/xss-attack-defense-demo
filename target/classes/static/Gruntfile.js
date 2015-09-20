@@ -38,7 +38,16 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
-                    livereload: grunt.option('livereloadport') || LIVERELOAD_PORT
+                    livereload: grunt.option('livereloadport') || LIVERELOAD_PORT,
+                    middleware: function(connect, options, middlewares) {
+                      middlewares.unshift(function(req, res, next) {
+                          res.setHeader('Access-Control-Allow-Origin', '*');
+                          res.setHeader('Access-Control-Allow-Methods', '*');
+                          next();
+                      });
+
+                      return middlewares;
+                    }
                 },
                 files: [
                     '<%= yeoman.app %>/*.html',

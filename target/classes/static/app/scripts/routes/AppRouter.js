@@ -7,35 +7,22 @@ Static.Routers = Static.Routers || {};
 
     Static.Routers.AppRouter = Backbone.Router.extend({
         routes: {
-            "xss-persistent" : "persistent", // #help
-            "xss-dom" :        "dom", // #help
-          },
+            "#documents"     : "showDocuments",
+            '*path':  'defaultRoute'
+        },
 
-          persistent:function(){
-            console.log('persistent');
+
+        showDocuments : function(){
             if(this.currView){
                 this.currView.close();
             }
 
-            this.currView = new Static.Views.XSSPersistentView().render();
-          },
+            this.currView = new Static.Views.DocumentListView().render();
+        },
 
-           dom:function(){
-              console.log('dom');
-              if(this.currView){
-                  this.currView.close();
-              }
-
-              this.currView = new Static.Views.XSSDomView().render();
-            },
-
-          help: function() {
-
-          },
-
-          search: function(query, page) {
-
-          }
+        defaultRoute : function(){
+            this.showDocuments();
+        }
     });
 
 })();

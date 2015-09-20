@@ -14,13 +14,17 @@ Static.Views = Static.Views || {};
         initialize: function () {
             var templateContent = $('#xss-persistent-template').html();
             this.template = Handlebars.compile(templateContent)
-            this.model    = new Backbone.Model({comments:[], evilStuff: '<button onclick="alert(\'waaaggh!\')">Button</button>'});
+            this.model    = new Static.Collections.Images();
 
-            this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.model, 'all', this.render);
+            this.model.fetch({async: false});
+
+            console.log(this.model.toJSON());
         },
 
         render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.template({images : this.model.toJSON()}));
+            CKEDITOR.replace( 'editor1' );
             return this;
         },
 
@@ -32,11 +36,10 @@ Static.Views = Static.Views || {};
 
         addComment : function(event){
             event.preventDefault();
-            var comment  = this.$("#comment-input").val();
-            var comments = _.clone(this.model.get("comments"));
-            comments.push(comment);
+            var imageUrl   = this.$("#image-url").val();
+            var imageDescr = this.$("#image-descr").val();
 
-            this.model.set({comments: comments});
+            this.model.add({imageUrl: imageUrl, imageDescr: imageDescr});
         }
     });
 

