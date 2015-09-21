@@ -16,18 +16,14 @@ Static.Views = Static.Views || {};
 
             this.template  = Handlebars.compile(templateContent)
             this.model     = new Backbone.Model();
-            this.model.url = 'http://localhost:8080/documents/'+options.query;
+            this.model.url = 'http://localhost:8080/documents/details?title='+options.query;
 
             this.model.fetch({
                 success:function(model, response, options){
                     console.log('Document with title "'+query+'" fetched ok.')
                 },
                 error:function(model, response, options){
-                    if(response.status === 404){
-                        self.error = '<p>Searching for:'+query+'<p><p>No document found</p>';
-                    }else{
-                        self.error = 'error';
-                    }
+                    self.error = response.responseText;
                     self.render();
                 }
             })

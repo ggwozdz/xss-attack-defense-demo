@@ -23,11 +23,13 @@ Static.Views = Static.Views || {};
                     console.log('Document with title "'+query+'" fetched ok.')
                 },
                 error:function(model, response, options){
-                    if(response.status === 404){
-                        self.error = '<p>Searching for:'+query+'<p><p>No document found</p>';
-                    }else{
-                        self.error = 'error';
-                    }
+                    //if(response.status === 404){
+                    //    self.error = '<p>Searching for:'+query+'<p><p>No document found</p>';
+                    //}else{
+                    //    self.error = 'error';
+                    //}
+                    self.error = response.responseText;
+
                     self.render();
                 }
             })

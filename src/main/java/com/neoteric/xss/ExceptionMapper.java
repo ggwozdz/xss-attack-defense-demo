@@ -19,4 +19,11 @@ public class ExceptionMapper {
     public String handleNotFound(HttpServletRequest req, NotFoundException ex) {
         return ex.getMessage();
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseBody
+    public String handleBadRequest(HttpServletRequest req, IllegalArgumentException ex) {
+        return ex.getMessage();
+    }
 }

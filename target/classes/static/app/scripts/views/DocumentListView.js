@@ -24,7 +24,7 @@ Static.Views = Static.Views || {};
         },
 
         render: function () {
-            this.$el.html(this.template({documents : this.model.toJSON()}));
+            this.$el.html(this.template({documents : this.model.toJSON(), error: this.error}));
             var currInstance = CKEDITOR.instances['document-editor'];
             if(currInstance){
                 currInstance.removeAllListeners();
@@ -53,7 +53,7 @@ Static.Views = Static.Views || {};
 
         createDocument : function(event){
             event.preventDefault();
-            var title = this.$('#title-input').val();
+            var title = $('#title-input').val();
             var content = CKEDITOR.instances['document-editor'].getData();
             var self = this;
 
@@ -64,6 +64,10 @@ Static.Views = Static.Views || {};
               data: JSON.stringify({title : title, content: content}),
               success: function(){
                 self.model.fetch({async: false});
+              },
+              error: function(response, arg2, arg3){
+                self.error = response.responseText;
+                self.render();
               },
               dataType: 'json'
             });
