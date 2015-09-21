@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Created by ggwozdz on 20.09.15.
+ */
 @ControllerAdvice
-class GlobalExceptionMApper {
-    @ResponseStatus(HttpStatus.NOT_FOUND)  // 409
+public class ExceptionMapper {
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     @ResponseBody
     public String handleNotFound(HttpServletRequest req, NotFoundException ex) {

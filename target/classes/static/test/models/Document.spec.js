@@ -1,10 +1,10 @@
 /*global beforeEach, describe, it, assert, expect  */
 'use strict';
 
-describe('XSSEditorView View', function () {
+describe('Document Model', function () {
 
     beforeEach(function () {
-        this.XSSEditorViewView = new Static.Views.XSSEditorView();
+        this.DocumentModel = new Static.Models.Document();
     });
 
 });

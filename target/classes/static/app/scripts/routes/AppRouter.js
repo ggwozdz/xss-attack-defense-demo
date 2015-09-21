@@ -7,21 +7,31 @@ Static.Routers = Static.Routers || {};
 
     Static.Routers.AppRouter = Backbone.Router.extend({
         routes: {
-            "#documents"     : "showDocuments",
-            '*path':  'defaultRoute'
+            "documents/*path" : "showDocumentDetails",
+            "documents"        : "showDocuments",
+            '*path'            :  'defaultRoute'
         },
 
 
         showDocuments : function(){
-            if(this.currView){
-                this.currView.close();
-            }
+            console.log('showDocuments');
+            this.switchView(new Static.Views.DocumentListView({}).render());
+        },
 
-            this.currView = new Static.Views.DocumentListView().render();
+        showDocumentDetails : function(title){
+            console.log('showDocumentDetails');
+            this.switchView(new Static.Views.DocumentDetailsView({query:title}).render());
         },
 
         defaultRoute : function(){
             this.showDocuments();
+        },
+
+        switchView: function(newView){
+            if(this.currView){
+                this.currView.close();
+            }
+            this.currView = newView;
         }
     });
 

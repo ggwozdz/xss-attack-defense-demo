@@ -28,6 +28,10 @@ public class DocumentInfo {
     }
 
     public void setContent(String content) {
-        this.content = content;
+        this.content = content
+                //.replaceAll("\"", "&quot;")
+                //.replaceAll("\\(", "&lpar;")
+                //.replaceAll("\\)", "&rpar;")
+                ;
     }
 }
